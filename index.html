@@ -1,12 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Najibur Rahman | Portfolio</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ---------- Reset & Base ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ---------- Typography ---------- */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            border-bottom: 3px solid #3b82f6;
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            padding: 4rem 0 3rem;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 2;
+            min-width: 280px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #3b82f6;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.03);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            width: fit-content;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin: 0.5rem 0 0.2rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .hero-desc {
+            max-width: 650px;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            margin-top: 0.8rem;
+        }
+
+        /* ---------- About ---------- */
+        #about {
+            padding: 4rem 0;
+            background: #ffffff;
+        }
+
+        .about-wrapper {
+            max-width: 800px;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            color: #334155;
+        }
+
+        /* ---------- Skills ---------- */
+        #skills {
+            padding: 4rem 0;
+            background: #f1f5f9;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+        }
+
+        .skill-category {
+            flex: 1 1 200px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tags span {
+            background: #ffffff;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* ---------- Education ---------- */
+        #education {
+            padding: 4rem 0;
+            background: #ffffff;
+        }
+
+        .edu-card {
+            background: #f8fafc;
+            padding: 1.8rem 2rem;
+            border-radius: 12px;
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            max-width: 700px;
+        }
+
+        .edu-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .edu-meta {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin: 0.2rem 0 0.5rem;
+        }
+
+        .edu-card p {
+            color: #334155;
+        }
+
+        /* ---------- Projects ---------- */
+        #projects {
+            padding: 4rem 0;
+            background: #f1f5f9;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #ffffff;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.6rem 0 0.8rem;
+        }
+
+        .tech-badge {
+            background: #e2e8f0;
+            padding: 0.15rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .project-desc {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- Training ---------- */
+        #training {
+            padding: 4rem 0;
+            background: #ffffff;
+        }
+
+        .cert-card {
+            background: #f8fafc;
+            padding: 1.8rem 2rem;
+            border-radius: 12px;
+            border-left: 5px solid #8b5cf6;
+            max-width: 700px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .cert-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .cert-meta {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin: 0.2rem 0 0.4rem;
+        }
+
+        .cert-card p {
+            color: #334155;
+        }
+
+        /* ---------- Contact ---------- */
+        #contact {
+            padding: 4rem 0;
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+
+        #contact .section-title {
+            color: #f1f5f9;
+            border-bottom-color: #3b82f6;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem 3rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-details p {
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .contact-details i {
+            color: #3b82f6;
+            width: 1.4rem;
+            font-size: 1.2rem;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            background: #0a0f1a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 1.8rem 0;
+            font-size: 0.95rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 768px) {
+            .hero-grid {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-badge {
+                margin: 0 auto;
+            }
+
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image img {
+                width: 170px;
+                height: 170px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-tagline {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .edu-card,
+            .cert-card {
+                padding: 1.2rem;
+            }
+            .contact-details {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-image img {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello I am Najibur Rahman</h1>
-    
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+
+            <!-- Photo -->
+            <div class="hero-image">
+                <img src="NR photo.jpg" alt="Najibur Rahman - Profile Photo" />
+            </div>
+
+            <!-- Text Content -->
+            <div class="hero-content">
+                <div class="hero-badge">Computer Science &amp; Engineering (Data Science) Student</div>
+                <h1>Najibur Rahman</h1>
+                <div class="hero-tagline">Aspiring Software Developer &amp; Machine Learning Enthusiast</div>
+                <p class="hero-desc">
+                    Motivated Computer Science &amp; Engineering student with strong foundations in programming,
+                    data structures, and web development. Passionate about building practical solutions.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-wrapper">
+                <div class="about-text">
+                    <p>
+                        I am currently pursuing a B.Tech in Computer Science &amp; Engineering (Data Science)
+                        at Kazi Nazrul University.
+                    </p>
+                    <p style="margin-top:1rem;">
+                        My areas of interest include software development, machine learning, data structures,
+                        algorithms, and web technologies. I enjoy building practical applications and continuously
+                        learning new technologies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span>C</span>
+                        <span>C++</span>
+                        <span>Java</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+                <!-- Add more categories if needed (Web, DB, etc.) -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="edu-card">
+                <div class="edu-title">B.Tech in Computer Science &amp; Engineering (Data Science)</div>
+                <div class="edu-meta">Kazi Nazrul University | 2023 – 2027</div>
+                <p>Current CGPA: <strong>7.65</strong> (till 5th semester)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <div class="project-title">Mess Management System</div>
+                    <div class="project-tech">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
+                    <div class="project-desc">Web-based platform for managing mess operations and information.</div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">Water Management System</div>
+                    <div class="project-tech">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
+                    <div class="project-desc">A system to monitor and manage water usage and distribution.</div>
+                </div>
+
+                <!-- Add more projects as needed -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRAINING ===== -->
+    <section id="training">
+        <div class="container">
+            <h2 class="section-title">Training</h2>
+            <div class="cert-card">
+                <div class="cert-title">Machine Learning Training</div>
+                <div class="cert-meta">Acmegrade | April 2026 – May 2026</div>
+                <p>Completed training in machine learning, gaining practical exposure to data analysis and predictive
+                    modeling using Python.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-details">
+                <p><i class="fas fa-phone-alt"></i> +91 6297850173</p>
+                <p><i class="fas fa-envelope"></i> najibur686@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Birbhum, West Bengal, India</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Najibur Rahaman</p>
+        </div>
+    </footer>
+
 </body>
 </html>
